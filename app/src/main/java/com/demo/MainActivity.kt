@@ -106,6 +106,7 @@ fun imageUpdate(url: String,
                 .background(Color.DarkGray),
             elevation = 2.dp
         ) {
+            SimpleCircularProgressIndicator()
             NetworkImageComponentGlidePreview(url)
 
         }
@@ -205,8 +206,8 @@ fun NetworkImageComponentGlide(
            val glide = Glide.with(context)
            val target = object : CustomTarget<Bitmap>() {
                override fun onLoadCleared(placeholder: Drawable?) {
-                   image = null
-                   drawable = placeholder
+                       image = null
+                       drawable = placeholder
                }
 
                override fun onResourceReady(
@@ -264,6 +265,21 @@ fun NetworkImageComponentGlide(
 fun NetworkImageComponentGlidePreview(url: String) {
 
     NetworkImageComponentGlide(url)
+}
+
+@Composable
+fun SimpleCircularProgressIndicator(modifier: Modifier = Modifier) {
+    val sizeModifier = modifier
+        .fillMaxWidth()
+        .sizeIn(maxHeight = 40.dp)
+    Column(
+        modifier = sizeModifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        CircularProgressIndicator()
+    }
 }
 
 class HelloViewModel : ViewModel() {
